@@ -2,12 +2,13 @@ import { FC as FC } from "react";
 import { CommonButtonProps } from "@utils/common-props";
 
 const ButtonInterface: FC<CommonButtonProps> = (props) => {
-  const { children, className, onClick, ...restProps } = props;
+  const { children, className, onClick, type = "button", ...restProps } = props;
   const baseStyleClasses =
     "border border-2 rounded-md p-2 disabled:bg-gray-400 transition duration-150 active:scale-95 disabled:active:scale-[1.02]";
 
   return (
     <button
+      type={type}
       {...restProps}
       className={`${baseStyleClasses} ${className ?? ""}`}
       onClick={(event) => {
