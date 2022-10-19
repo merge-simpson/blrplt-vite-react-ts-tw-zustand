@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-const useRefEffect = (
-  callback: React.EffectCallback,
-  deps?: React.DependencyList
-) => {
+type T = React.EffectCallback;
+type P = React.DependencyList;
+
+const useRefEffect = (callback: T, deps?: P) => {
   useEffect(() => {
     if (!deps) {
       callback();
       return;
     }
 
-    for (let i = 0; i < deps.length; i++) {
-      const target = deps[i] as HTMLElement | null;
-
+    for (const target of deps as HTMLElement[]) {
       if (!!target) {
         target.oninput = (event) => callback();
       }
