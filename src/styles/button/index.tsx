@@ -36,8 +36,8 @@ const MainButton: FC<CommonButtonProps> = (props) => {
 export const SubButton: FC<CommonButtonProps> = (props) => {
   const { children, className, ...restProps } = props;
 
-  const stableClasses = "bg-primary text-primary-contra";
-  const activeClasses = "active:bg-primary-active";
+  const stableClasses = "bg-sub text-sub-contra";
+  const activeClasses = "";
 
   return (
     <ButtonInterface
