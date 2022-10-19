@@ -33,7 +33,21 @@ const MainButton: FC<CommonButtonProps> = (props) => {
   );
 };
 
-export default MainButton;
+export const SubButton: FC<CommonButtonProps> = (props) => {
+  const { children, className, ...restProps } = props;
+
+  const stableClasses = "bg-primary text-primary-contra";
+  const activeClasses = "active:bg-primary-active";
+
+  return (
+    <ButtonInterface
+      {...restProps}
+      className={`${stableClasses} ${activeClasses} ${className ?? ""}`}
+    >
+      {children}
+    </ButtonInterface>
+  );
+};
 
 export const PrimaryButton: FC<CommonButtonProps> = (props) => {
   const { children, className, ...restProps } = props;
@@ -210,3 +224,5 @@ export const DefaultButton: FC<CommonButtonProps> = (props) => {
     </ButtonInterface>
   );
 };
+
+export default MainButton;
