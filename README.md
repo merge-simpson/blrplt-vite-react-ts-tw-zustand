@@ -1,3 +1,8 @@
 # Boiler Plate of Vite + React 18 + Typescript + Tailwind + Zustand
 
-그냥 내가 자주 쓰는 조합.
+- react 18
+- react router dom v6
+- vite 2.9
+- typescript
+- tailwind
+- zustand v2
