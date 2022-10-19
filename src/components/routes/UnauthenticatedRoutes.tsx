@@ -4,7 +4,7 @@ const UnauthenticatedRoutes = () => {
   return (
     <Routes>
       <Route path="login" element={<div>Login Page</div>} />
-      <Route path="*" element={<Navigate replace to="/" />} />
+      <Route path="*" element={<Navigate replace to="/login" />} />
     </Routes>
   );
 };
