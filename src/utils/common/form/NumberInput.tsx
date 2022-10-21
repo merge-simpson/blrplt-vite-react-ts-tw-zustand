@@ -80,24 +80,18 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           const isNag = "-" === event.target.value.at(0); // can be sign(-)
           const abs = event.target.value.slice(+isNag);
 
-          console.log(abs);
-
           const value = +`${isNag ? "-" : ""}${abs.replace(/[^0-9\.]/g, "")}`;
-          console.log(
-            value.toLocaleString("ko-KR", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 3,
-              minimumFractionDigits: 0,
-            })
-          );
 
           if (!value) {
             event.target.value = "0";
             return;
           }
 
-          event.target.value = value.toLocaleString();
+          event.target.value = value.toLocaleString("ko-KR", {
+            maximumFractionDigits: 20,
+            minimumFractionDigits: 0,
+          });
+
           console.log(event.target.value);
           onChange && onChange(event);
         }}
