@@ -15,8 +15,9 @@ const useSampleStore = create<SampleState>((set, get) => ({
     const state = get();
     set({ num: state.num + 1 });
 
-    // get()을 쓰지 않고 다음 형태도 가능
     // set((state) => ({num: state.num + 1}));
   },
   // EOF
 }));
+
+export default useSampleStore;
