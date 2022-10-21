@@ -5,7 +5,7 @@ export interface NumberInputProps extends CommonInputProps {}
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, ref) => {
-    const { onChange, className, ...restProps } = props;
+    const { onChange, className, onKeyDown, ...restProps } = props;
 
     return (
       <input
@@ -21,6 +21,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               (event.target as HTMLInputElement).value = "0";
             }
           }
+
+          onKeyDown && onKeyDown(event);
         }}
         onChange={(event) => {
           const dotIndex = event.target.value.indexOf(".");
@@ -93,7 +95,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           });
 
           console.log(event.target.value);
-          onChange && onChange(event);
         }}
       />
     );
