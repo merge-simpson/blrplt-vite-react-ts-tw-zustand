@@ -2,7 +2,7 @@ import AuthInfo from "@models/auth/dto/AuthInfo";
 import LoginOutletContext from "@models/auth/routes/LoginOutletContext";
 import LoginOutletParams from "@models/auth/routes/LoginOutletParams";
 import LoginStepName from "@models/auth/routes/LoginStepName";
-import useRefEffect from "@utils/useRefEffect";
+import useRefEffect from "@utils/common/useRefEffect";
 import {
   useCallback,
   useEffect,

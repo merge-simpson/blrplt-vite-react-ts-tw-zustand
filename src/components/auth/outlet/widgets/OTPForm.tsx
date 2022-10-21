@@ -1,4 +1,4 @@
-import useRefEffect from "@utils/useRefEffect";
+import useRefEffect from "@utils/common/useRefEffect";
 import { useEffect, useRef, useState } from "react";
 
 const OTPForm = () => {
