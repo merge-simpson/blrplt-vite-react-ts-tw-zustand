@@ -1,5 +1,5 @@
 import { FC as FC } from "react";
-import { CommonButtonProps } from "@utils/common-props";
+import { CommonButtonProps } from "@models/common/props";
 
 const ButtonInterface: FC<CommonButtonProps> = (props) => {
   const { children, className, onClick, type = "button", ...restProps } = props;
