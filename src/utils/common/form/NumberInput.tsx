@@ -95,6 +95,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           });
 
           console.log(event.target.value);
+          onChange && onChange(event);
         }}
       />
     );
