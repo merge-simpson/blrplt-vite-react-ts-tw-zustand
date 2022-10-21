@@ -47,6 +47,9 @@ const ZustandPreview = () => {
               <span>Number</span>
               <NumberInput
                 className="border bg-gray-100 text-right px-2 py-4 text-2xl"
+                onKeyDown={(event) => {
+                  setTargetNum(0); // default
+                }}
                 onChange={(evt) => {
                   const targetNum = +(
                     evt.target as HTMLInputElement
