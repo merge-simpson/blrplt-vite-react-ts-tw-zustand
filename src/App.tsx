@@ -17,12 +17,12 @@ function App() {
 
   return (
     <div className="min-h-screen">
+      {RoutesComponent}
       <aside className="fixed left-1/2 -translate-x-1/2 top-2">
         <DarkButton onClick={() => setAuthenticated(!isAuthenticated)}>
           Flip state of auth
         </DarkButton>
       </aside>
-      {RoutesComponent}
     </div>
   );
 }
