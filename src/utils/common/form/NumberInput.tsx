@@ -13,6 +13,15 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         ref={ref}
         defaultValue={"0"}
         className={`border bg-gray-100 text-right px-2 py-4 text-2xl ${className}`}
+        onKeyDown={(event) => {
+          console.log(event.key);
+          if ("backspace" === event.key.toLowerCase()) {
+            // 변경되기 전 값을 알 수 있음.
+            if ((event.target as HTMLInputElement).value === "-0") {
+              (event.target as HTMLInputElement).value = "0";
+            }
+          }
+        }}
         onChange={(event) => {
           const dotIndex = event.target.value.indexOf(".");
           const hyphenIndex = event.target.value.indexOf("-");
@@ -76,7 +85,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           const value = +`${isNag ? "-" : ""}${abs.replace(/[^0-9\.]/g, "")}`;
           console.log(
             value.toLocaleString("ko-KR", {
-              maximumFractionDigits: 17,
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 3,
               minimumFractionDigits: 0,
             })
           );
