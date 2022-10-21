@@ -1,5 +1,5 @@
 import { DarkButton } from "@styles/button";
-import TelInput from "@styles/form/TelInput";
+import TelInput from "@utils/common/form/TelInput";
 import { useEffect, useRef } from "react";
 
 const InputFormPreview = () => {
