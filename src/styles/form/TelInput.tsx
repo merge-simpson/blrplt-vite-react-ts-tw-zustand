@@ -7,13 +7,7 @@ export interface TelInputProps extends CommonInputProps {
 
 const TelInput = forwardRef<HTMLInputElement, TelInputProps>(
   (props, forwardRef) => {
-    const {
-      // forwardRef,
-      telState = "",
-      onChange,
-      className,
-      ...restProps
-    } = props;
+    const { telState = "", onChange, className, ...restProps } = props;
 
     return (
       <input
