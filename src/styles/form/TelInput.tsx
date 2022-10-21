@@ -1,13 +1,11 @@
 import { CommonInputProps } from "@models/common/props";
 import { forwardRef } from "react";
 
-export interface TelInputProps extends CommonInputProps {
-  telState?: string;
-}
+export interface TelInputProps extends CommonInputProps {}
 
 const TelInput = forwardRef<HTMLInputElement, TelInputProps>(
   (props, forwardRef) => {
-    const { telState = "", onChange, className, ...restProps } = props;
+    const { onChange, className, ...restProps } = props;
 
     return (
       <input
