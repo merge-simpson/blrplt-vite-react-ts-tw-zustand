@@ -14,7 +14,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         defaultValue={"0"}
         className={`border bg-gray-100 text-right px-2 py-4 text-2xl ${className}`}
         onKeyDown={(event) => {
-          console.log(event.key);
           if ("backspace" === event.key.toLowerCase()) {
             // 변경되기 전 값을 알 수 있음.
             if ((event.target as HTMLInputElement).value === "-0") {
@@ -94,7 +93,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             minimumFractionDigits: 0,
           });
 
-          console.log(event.target.value);
           onChange && onChange(event);
         }}
       />
