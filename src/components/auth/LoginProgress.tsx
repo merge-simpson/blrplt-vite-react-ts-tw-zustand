@@ -16,11 +16,13 @@ import LoginButtonGroup from "./button/LoginButtonGroup";
 import useLoginNavigate from "@utils/auth/routes/useLoginNavigate";
 import useAuth from "@store/useAuth";
 import ContextCallbackOption from "@models/common/api/ContextCallbackOption";
+import useToast from "@store/useToast";
 
 const LoginProgress = () => {
   const params = useParams() as LoginOutletParams;
   const auth = useAuth();
   const loginNavigate = useLoginNavigate();
+  const toast = useToast();
 
   const userNameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -58,6 +60,7 @@ const LoginProgress = () => {
   useLayoutEffect(() => {
     let currentStep = loginStep.indexOf(params.stepName as LoginStepName);
     if (authInfo.userName === "" && currentStep > 0) {
+      toast.open("아이디를 입력하세요.");
       loginNavigate(0);
     }
 
