@@ -1,8 +1,10 @@
+import LoginOutletContext from "@models/auth/routes/LoginOutletContext";
 import useRefEffect from "@utils/common/useRefEffect";
 import { useEffect, useRef, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const OTPForm = () => {
-  const otpRef = useRef<HTMLInputElement | null>(null);
+  const { otpRef } = useOutletContext<LoginOutletContext>();
 
   useEffect(() => {
     otpRef.current?.focus();
@@ -11,7 +13,6 @@ const OTPForm = () => {
   useRefEffect(() => {}, [otpRef.current]);
 
   return (
-    //
     <div className="flex flex-col gap-4">
       <span>Input OTP in 3 min.</span>
       <fieldset className="grid grid-cols-4">

@@ -4,9 +4,19 @@ const generateOTP = () => {
 };
 
 const getOTPPromiseDummy = (userName: string) => {
-  (window as any).DB_DUMMY.otpMap = {
-    [userName]: generateOTP(),
-  };
+  // init
+  if (!(window as any)?.DB_DUMMY) {
+    (window as any).DB_DUMMY = {
+      otpMap: {},
+    };
+  } else if (!(window as any).DB_DUMMY.otpMap) {
+    (window as any).DB_DUMMY.otpMap = {
+      [userName]: generateOTP(),
+    };
+  }
+
+  (window as any).DB_DUMMY.otpMap[userName] = generateOTP();
+
   console.log("otp map >>> ", (window as any).DB_DUMMY.otpMap);
 
   return new Promise<{ data: boolean }>((resolve, reject) => {

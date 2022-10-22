@@ -1,4 +1,5 @@
 import getLoginPromiseDummy from "@data/auth/loginPromiseDummy";
+import getOTPPromiseDummy from "@data/auth/otpPromiseDummy";
 import AuthInfo from "@models/auth/dto/AuthInfo";
 import UserDummy from "@models/auth/UserDummy";
 import ContextCallbackOption from "@models/common/api/ContextCallbackOption";
@@ -9,30 +10,53 @@ import create from "zustand";
 interface AuthState {
   isAuthenticated: boolean;
 
-  userName: string;
+  authInfo: AuthInfo;
+  otp: string;
 
-  sendOTPRequest: (authInfo: AuthInfo, option?: ContextCallbackOption) => void;
-  login: (otp: string, option?: ContextCallbackOption) => void;
+  setAuthInfo: (authInfo: AuthInfo) => void;
+  setOTP: (otp: string) => void;
+
+  sendOTPRequest: (option?: ContextCallbackOption) => void;
+  login: (option?: ContextCallbackOption) => void;
   logout: (option?: ContextCallbackOption) => void;
 }
 
 const useAuth = create<AuthState>((set, get) => ({
   isAuthenticated: false,
-  userName: "",
 
-  sendOTPRequest: (authInfo, option) => {
+  authInfo: {
+    userName: "",
+    password: "",
+  },
+  otp: "",
+
+  setAuthInfo: (authInfo) => set({ authInfo }),
+  setOTP: (otp) => set({ otp }),
+
+  sendOTPRequest: (option) => {
     const state = get();
-    set({ userName: authInfo.userName });
+    const otpPromise = getOTPPromiseDummy(state.authInfo.userName);
+
+    otpPromise
+      .then(({ data }) => data)
+      .then((ok) => {
+        //
+      });
+
     option?.success && option.success();
   },
 
-  login: (otp, option) => {
+  login: (option) => {
     const state = get();
-    const loginPromise = getLoginPromiseDummy(otp, state.userName);
+    const loginPromise = getLoginPromiseDummy(
+      state.otp,
+      state.authInfo.userName
+    );
 
     loginPromise
       .then(({ data }) => data)
       .then((user: UserDummy) => {
+        console.log(user);
         storageManager.setItem(STORAGE_KEY.AUTH_USER, JSON.stringify(user));
         set({ isAuthenticated: true });
         option?.success && option.success(user);

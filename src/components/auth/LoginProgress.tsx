@@ -14,20 +14,22 @@ import { Outlet, useParams } from "react-router-dom";
 import { loginStep } from "@utils/auth/routes/LoginOutletComponents";
 import LoginButtonGroup from "./button/LoginButtonGroup";
 import useLoginNavigate from "@utils/auth/routes/useLoginNavigate";
+import useAuth from "@store/useAuth";
+import ContextCallbackOption from "@models/common/api/ContextCallbackOption";
 
 const LoginProgress = () => {
   const params = useParams() as LoginOutletParams;
+  const auth = useAuth();
   const loginNavigate = useLoginNavigate();
 
   const userNameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const otpRef = useRef<HTMLInputElement | null>(null);
+
+  const { authInfo, setAuthInfo, otp, setOTP } = auth;
 
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [isLastStep, setIfLastStep] = useState<boolean>(false);
-  const [authInfo, setAuthInfo] = useState<AuthInfo>({
-    userName: "",
-    password: "",
-  });
 
   // Just mount or unmount
   useEffect(() => {
@@ -40,13 +42,17 @@ const LoginProgress = () => {
     userNameRef.current?.focus();
   }, [userNameRef.current]);
 
-  // tracking if value changed
+  // tracks if value changed
   useRefEffect(() => {
     setAuthInfo({
       userName: userNameRef.current?.value ?? "",
       password: passwordRef.current?.value ?? "",
     });
   }, [userNameRef.current, passwordRef.current]);
+
+  useRefEffect(() => {
+    setOTP(otpRef.current?.value ?? "");
+  }, [otpRef.current]);
 
   // parse params
   useLayoutEffect(() => {
@@ -73,38 +79,16 @@ const LoginProgress = () => {
         loginNavigate(currentStep + 1);
         return;
       }
+    };
 
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({
-          userName: userNameRef.current?.value,
-          anotherAuthInfo: "something",
-        })
-      );
+    const option: ContextCallbackOption = {
+      success: next,
     };
 
     if (stepName === "auth") {
-      const authPromise = new Promise<{ data: boolean }>((resolve, reject) =>
-        resolve({ data: true })
-      );
-
-      authPromise
-        .then(({ data }) => data)
-        .then((ok) => {
-          ok && next();
-        })
-        .catch(console.error);
+      auth.sendOTPRequest(option);
     } else if (stepName === "otp") {
-      const authPromise = new Promise<{ data: any }>((resolve, reject) =>
-        resolve({ data: true })
-      );
-
-      authPromise
-        .then(({ data }) => data)
-        .then((ok) => {
-          ok && next();
-        })
-        .catch(console.error);
+      auth.login(option);
     }
   }, [params, currentStep, isLastStep]);
 
@@ -121,7 +105,7 @@ const LoginProgress = () => {
           }}
         >
           <Outlet
-            context={{ userNameRef, passwordRef } as LoginOutletContext}
+            context={{ userNameRef, passwordRef, otpRef } as LoginOutletContext}
           />
           <div className="flex justify-end">
             <LoginButtonGroup

@@ -1,23 +1,39 @@
-import getOTPPromiseDummy from "./otpPromiseDummy";
+import UserDummy from "@models/auth/UserDummy";
 
 const getLoginPromiseDummy = (otp: string, userName: string) =>
-  new Promise<{ data: any }>((resolve, reject) => {
+  new Promise<{ data: UserDummy }>((resolve, reject) => {
     const userDummy = {
       userName,
       fullName: "홍길동",
       nickname: "호부호형의꿈",
     };
 
-    const hasCorrectOTP = otp === (window as any).DB_DUMMY.otpMap[userName];
+    const hasCorrectOTP = (() => {
+      const correctOTP = (window as any).DB_DUMMY.otpMap[userName];
+      const correct = otp === correctOTP;
+      if (correct) {
+        delete (window as any).DB_DUMMY.otpMap[userName];
+      }
+      return correct;
+    })();
 
-    if (hasCorrectOTP) {
+    console.debug(
+      "otp >>> ",
+      otp,
+      "userName >>> ",
+      userName,
+      "has correct OTP >>> ",
+      hasCorrectOTP
+    );
+
+    if (!hasCorrectOTP) {
       const error = new Error(`OTP not correct.`);
       reject(error);
+      return;
     }
 
     const responseDummy = { data: { ...userDummy } };
     resolve(responseDummy);
-    delete (window as any).DB_DUMMY.otpMap[userName];
   });
 
 export default getLoginPromiseDummy;
