@@ -89,11 +89,23 @@ const LoginProgress = () => {
     };
 
     if (stepName === "auth") {
-      auth.sendOTPRequest(option);
+      auth.sendOTPRequest({
+        success: (data) => {
+          // 임시로 여기 띄움
+          const displayOTPDummy = () =>
+            toast.open(
+              (window as any).DB_DUMMY.otpMap[authInfo.userName],
+              5_000
+            );
+
+          displayOTPDummy();
+          option.success!();
+        },
+      });
     } else if (stepName === "otp") {
       auth.login(option);
     }
-  }, [params, currentStep, isLastStep]);
+  }, [params, authInfo.userName, currentStep, isLastStep]);
 
   return (
     <div className="flex flex-col items-center gap-8 pt-16">
