@@ -4,5 +4,6 @@
 - react router dom v6
 - vite 2.9
 - typescript
-- tailwind
+- tailwind 3
 - zustand v2
+- react framer(framer motion v7)
