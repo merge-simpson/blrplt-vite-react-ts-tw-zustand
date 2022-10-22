@@ -3,9 +3,12 @@ import UnauthenticatedRoutes from "@components/routes/UnauthenticatedRoutes";
 import { useEffect, useState } from "react";
 import ProtectedRoutes from "@components/routes/ProtectedRoutes";
 import { DarkButton } from "@styles/button";
+import useAuth from "@store/useAuth";
 
 function App() {
-  const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+  // const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+  const auth = useAuth();
+  const { isAuthenticated, toggleAuthDummy } = auth;
   const [RoutesComponent, setRoutesComponent] = useState<React.ReactElement>(
     <UnauthenticatedRoutes />
   );
@@ -19,9 +22,7 @@ function App() {
     <div className="min-h-screen">
       {RoutesComponent}
       <aside className="fixed left-1/2 -translate-x-1/2 top-2">
-        <DarkButton onClick={() => setAuthenticated(!isAuthenticated)}>
-          Flip state of auth
-        </DarkButton>
+        <DarkButton onClick={toggleAuthDummy}>Flip state of auth</DarkButton>
       </aside>
     </div>
   );

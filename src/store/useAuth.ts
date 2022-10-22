@@ -19,6 +19,8 @@ interface AuthState {
   sendOTPRequest: (option?: ContextCallbackOption) => void;
   login: (option?: ContextCallbackOption) => void;
   logout: (option?: ContextCallbackOption) => void;
+
+  toggleAuthDummy: () => void;
 }
 
 const useAuth = create<AuthState>((set, get) => ({
@@ -69,6 +71,11 @@ const useAuth = create<AuthState>((set, get) => ({
     storageManager.clearAllUnsticky();
     set({ isAuthenticated: false });
     option?.success && option.success(true);
+  },
+
+  toggleAuthDummy: () => {
+    const state = get();
+    set({ isAuthenticated: !state.isAuthenticated });
   },
 
   // EOF
