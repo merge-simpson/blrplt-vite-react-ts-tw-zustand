@@ -8,8 +8,7 @@ const getLoginPromiseDummy = (otp: string, userName: string) =>
       nickname: "호부호형의꿈",
     };
 
-    const hasCorrectOTP =
-      otp === (getOTPPromiseDummy as any).DB_DUMMY.otpMap[userName];
+    const hasCorrectOTP = otp === (window as any).DB_DUMMY.otpMap[userName];
 
     if (hasCorrectOTP) {
       const error = new Error(`OTP not correct.`);
@@ -18,7 +17,7 @@ const getLoginPromiseDummy = (otp: string, userName: string) =>
 
     const responseDummy = { data: { ...userDummy } };
     resolve(responseDummy);
-    delete (getOTPPromiseDummy as any).DB_DUMMY.otpMap;
+    delete (window as any).DB_DUMMY.otpMap[userName];
   });
 
 export default getLoginPromiseDummy;
