@@ -42,10 +42,8 @@ const useAuth = create<AuthState>((set, get) => ({
     otpPromise
       .then(({ data }) => data)
       .then((ok) => {
-        //
+        option?.success && option.success();
       });
-
-    option?.success && option.success();
   },
 
   login: (option) => {
