@@ -1,9 +1,10 @@
 import STORAGE_KEY from "../storage-key";
 
 const storageManager = {
-  setItem: localStorage.setItem,
+  // setItem: localStorage.setItem, => Illegal invocation
+  setItem: (key: string, value: string) => localStorage.setItem(key, value),
 
-  getItem: localStorage.getItem,
+  getItem: (key: string) => localStorage.getItem(key),
 
   // 기기/브라우저 종속적 데이터가 있다면 STICKY하게 보존하고 다른 것만 지움.
   clearAllUnsticky: () => {
