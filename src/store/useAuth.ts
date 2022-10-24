@@ -3,8 +3,8 @@ import getOTPPromiseDummy from "@data/auth/otpPromiseDummy";
 import AuthInfo from "@models/auth/dto/AuthInfo";
 import UserDummy from "@models/auth/UserDummy";
 import ContextCallbackOption from "@models/common/api/ContextCallbackOption";
-import storageManager from "@utils/common/web/storage";
-import STORAGE_KEY from "@utils/common/web/storage-key";
+import storageManager from "@utils/common/storage";
+import STORAGE_KEY from "@utils/common/storage/key";
 import create from "zustand";
 
 interface AuthState {

@@ -1,4 +1,4 @@
-import STORAGE_KEY from "../storage-key";
+import STORAGE_KEY from "./key";
 
 const storageManager = {
   // setItem: localStorage.setItem, => Illegal invocation
