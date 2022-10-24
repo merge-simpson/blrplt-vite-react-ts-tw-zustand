@@ -5,14 +5,22 @@ export interface NumberInputProps extends CommonInputProps {}
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, ref) => {
-    const { onChange, className, onKeyDown, ...restProps } = props;
+    const {
+      onChange,
+      className,
+      onKeyDown,
+      value,
+      defaultValue,
+      ...restProps
+    } = props;
 
     return (
       <input
         {...restProps}
+        {...(value != null ? { value } : { defaultValue })}
         ref={ref}
         defaultValue={"0"}
-        className={`border bg-gray-100 text-right px-2 py-4 text-2xl ${className}`}
+        className={`${className}`}
         onKeyDown={(event) => {
           if ("backspace" === event.key.toLowerCase()) {
             // 변경되기 전 값을 알 수 있음.
