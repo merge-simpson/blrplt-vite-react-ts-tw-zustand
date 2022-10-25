@@ -19,7 +19,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         {...restProps}
         {...(value != null ? { value } : { defaultValue })}
         ref={ref}
-        defaultValue={"0"}
         className={`${className}`}
         onKeyDown={(event) => {
           if ("backspace" === event.key.toLowerCase()) {
