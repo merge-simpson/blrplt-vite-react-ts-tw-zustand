@@ -16,7 +16,7 @@ import LoginButtonGroup from "./button/LoginButtonGroup";
 import useLoginNavigate from "@utils/auth/routes/useLoginNavigate";
 import useAuth from "@store/useAuth";
 import ContextCallbackOption from "@models/common/api/ContextCallbackOption";
-import useToast from "@store/useToast";
+import useToast from "@utils/common/toast/store/useToast";
 
 const LoginProgress = () => {
   const params = useParams() as LoginOutletParams;
