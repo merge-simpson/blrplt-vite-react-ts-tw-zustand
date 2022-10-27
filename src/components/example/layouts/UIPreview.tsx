@@ -1,4 +1,4 @@
-import InputFormPreview from "./input-form/InputFormPreview";
+import InputFormPreview from "./input-form/TelInputPreview";
 import ZustandPreview from "./context/ZustandPreview";
 
 const UIPreview = () => {
