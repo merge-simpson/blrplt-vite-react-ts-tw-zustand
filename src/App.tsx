@@ -3,7 +3,7 @@ import UnauthenticatedRoutes from "@components/routes/UnauthenticatedRoutes";
 import { useEffect, useState } from "react";
 import ProtectedRoutes from "@components/routes/ProtectedRoutes";
 import { DarkButton } from "@styles/button";
-import useAuth from "@store/useAuth";
+import useAuth from "@store/auth/useAuth";
 
 function App() {
   // const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
