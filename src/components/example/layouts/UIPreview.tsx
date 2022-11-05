@@ -1,5 +1,6 @@
 import InputFormPreview from "./input-form/TelInputPreview";
 import ZustandPreview from "./context/ZustandPreview";
+import TimerPreview from "./timer/TimerPreview";
 
 const UIPreview = () => {
   return (
@@ -9,6 +10,7 @@ const UIPreview = () => {
         <section className="flex flex-col gap-8">
           <InputFormPreview />
           <ZustandPreview />
+          <TimerPreview />
         </section>
       </main>
     </div>
