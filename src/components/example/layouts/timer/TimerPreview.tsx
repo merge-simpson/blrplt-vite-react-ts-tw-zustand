@@ -41,7 +41,6 @@ const TimerPreview = () => {
             : "Resume"}
         </DangerButton>
       </div>
-      {/* initialMinute만 적으면: 2분 입력 시 1분 59초로 시작 */}
       {showsTimer && <Timer />}
     </div>
   );
