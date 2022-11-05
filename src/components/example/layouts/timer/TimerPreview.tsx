@@ -1,4 +1,4 @@
-import MainButton, { DangerButton } from "@styles/button";
+import MainButton, { DangerButton, SubButton } from "@styles/button";
 import useTimer from "@utils/common/timer";
 // import Timer from "@utils/common/timer-src";
 import useToast from "@utils/common/toast/store/useToast";
@@ -40,6 +40,13 @@ const TimerPreview = () => {
             ? "Pause"
             : "Resume"}
         </DangerButton>
+        <SubButton
+          onClick={() => {
+            timerService.reset();
+          }}
+        >
+          Reset
+        </SubButton>
       </div>
       {showsTimer && <Timer />}
     </div>
