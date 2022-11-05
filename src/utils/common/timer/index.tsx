@@ -24,10 +24,6 @@ export const useTimerService = () => {
 
   const expectedPassTimeRef = useRef<number>(0);
 
-  useEffect(() => {
-    console.log(initialMinutes);
-  }, [initialMinutes]);
-
   const [startTime, setStartTime] = useState(new Date().getTime());
 
   useLayoutEffect(() => {
@@ -36,7 +32,6 @@ export const useTimerService = () => {
     }
     const willDecrease = currentMinutes > 0 || currentSeconds > 0;
     if (!willDecrease) {
-      console.log("first");
       setRunning(false);
       setOver(true);
       onTimeout();
@@ -51,7 +46,7 @@ export const useTimerService = () => {
     const errorGap = realPassTime - expectedPassTime;
     const gain = errorGap > 0 ? errorGap << 1 : 0;
 
-    console.log(realPassTime);
+    console.debug("경과 시간: ", realPassTime);
 
     setTimeout(decreaseTime, 1000 - gain);
   }, [isRunning, currentMinutes, currentSeconds]);
@@ -69,7 +64,7 @@ export const useTimerService = () => {
   }, [currentMinutes, currentSeconds, isRunning]);
 
   const start = useCallback(() => {
-    console.log("start", isRunning);
+    console.debug("start");
     let willStart =
       currentMinutes === initialMinutes && currentSeconds === initialSeconds;
     willStart ||= currentMinutes === 0 && currentSeconds === 0;
@@ -79,7 +74,7 @@ export const useTimerService = () => {
       console.debug("Tried to start timer when already running or unreset.");
       return willStart;
     }
-    console.log(
+    console.debug(
       "initialMinutes",
       initialMinutes,
       "initialSeconds",
