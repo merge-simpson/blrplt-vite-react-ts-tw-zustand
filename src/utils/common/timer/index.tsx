@@ -3,7 +3,6 @@ import {
   useState,
   FunctionComponent as FC,
   useLayoutEffect,
-  useEffect,
   useRef,
 } from "react";
 import IntegerSeconds from "./models/IntegerSeconds";
