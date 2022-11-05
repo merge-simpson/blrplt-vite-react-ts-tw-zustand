@@ -34,24 +34,26 @@ export const useTimerService = () => {
     if (!isRunning) {
       return;
     }
-    const willDecrease = currentMinutes >= 0 || currentSeconds > 0;
-    if (willDecrease) {
-      const now = new Date().getTime();
-      const realPassTime = now - startTime;
-      const expectedPassTime = expectedPassTimeRef.current;
-      expectedPassTimeRef.current += 1000;
-
-      const errorGap = realPassTime - expectedPassTime;
-      const gain = errorGap > 0 ? errorGap << 1 : 0;
-
-      console.log(realPassTime);
-
-      setTimeout(decreaseTime, 1000 - gain);
-    } else {
+    const willDecrease = currentMinutes > 0 || currentSeconds > 0;
+    if (!willDecrease) {
+      console.log("first");
       setRunning(false);
       setOver(true);
       onTimeout();
+      return;
     }
+
+    const now = new Date().getTime();
+    const realPassTime = now - startTime;
+    const expectedPassTime = expectedPassTimeRef.current;
+    expectedPassTimeRef.current += 1000;
+
+    const errorGap = realPassTime - expectedPassTime;
+    const gain = errorGap > 0 ? errorGap << 1 : 0;
+
+    console.log(realPassTime);
+
+    setTimeout(decreaseTime, 1000 - gain);
   }, [isRunning, currentMinutes, currentSeconds]);
 
   const decreaseTime = useCallback(() => {
@@ -67,7 +69,7 @@ export const useTimerService = () => {
   }, [currentMinutes, currentSeconds, isRunning]);
 
   const start = useCallback(() => {
-    console.log("start");
+    console.log("start", isRunning);
     let willStart =
       currentMinutes === initialMinutes && currentSeconds === initialSeconds;
     willStart ||= currentMinutes === 0 && currentSeconds === 0;
