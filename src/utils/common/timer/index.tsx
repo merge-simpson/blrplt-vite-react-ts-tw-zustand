@@ -110,8 +110,8 @@ export const useTimerService = () => {
     const willReset =
       currentMinutes !== initialMinutes || currentSeconds !== initialSeconds;
 
-    if (!willReset) {
-      console.debug("Tried to reset when already same to reseted min, sec.");
+    if (isRunning || !willReset) {
+      console.debug("Tried to reset while running or already reset.");
       return willReset;
     }
 
@@ -121,7 +121,13 @@ export const useTimerService = () => {
     setCurrentSeconds(initialSeconds);
 
     return willReset;
-  }, [initialMinutes, initialSeconds]);
+  }, [
+    isRunning,
+    initialMinutes,
+    initialSeconds,
+    currentMinutes,
+    currentSeconds,
+  ]);
 
   // Initialize Service Object
   const timerService: TimerService = {
