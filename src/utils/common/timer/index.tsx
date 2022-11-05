@@ -142,8 +142,6 @@ export const useTimerService = () => {
       setInitialSeconds(initialSeconds);
       !isRunning && setCurrentSeconds(initialSeconds);
     },
-    setCurrentMinutes,
-    setCurrentSeconds,
 
     start,
     pause,

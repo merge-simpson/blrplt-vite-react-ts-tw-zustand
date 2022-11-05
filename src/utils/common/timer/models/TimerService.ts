@@ -10,8 +10,6 @@ interface TimerService {
 
   setInitialMinutes: (initialMinutes: number) => void;
   setInitialSeconds: (initialSeconds: IntegerSeconds) => void;
-  setCurrentMinutes: (currentMinutes: number) => void;
-  setCurrentSeconds: (currentSeconds: IntegerSeconds) => void;
 
   start: () => boolean;
   pause: () => boolean;
