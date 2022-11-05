@@ -11,8 +11,8 @@ const TimerPreview = () => {
   const [showsTimer, setShowsTimer] = useState<boolean>(false);
 
   useEffect(() => {
-    timerService.setInitialMinutes(1);
-    timerService.setInitialSeconds(3);
+    timerService.setInitialMinutes(0);
+    timerService.setInitialSeconds(2);
   }, []);
 
   return (
@@ -36,18 +36,7 @@ const TimerPreview = () => {
         </DangerButton>
       </div>
       {/* initialMinute만 적으면: 2분 입력 시 1분 59초로 시작 */}
-      {showsTimer && (
-        // <Timer
-        //   initialMinute={0}
-        //   initialSecond={5}
-        //   pauseState={pause}
-        //   boxClassName="w-20"
-        //   timeoutEventHandler={() => {
-        //     toast.open("완료");
-        //   }}
-        // />
-        <Timer />
-      )}
+      {showsTimer && <Timer />}
     </div>
   );
 };
