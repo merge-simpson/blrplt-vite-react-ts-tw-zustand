@@ -25,7 +25,7 @@ const TimerPreview = () => {
             timerService.start();
           }}
         >
-          {showsTimer ? "Restart" : "Start"}
+          {timerService.isOver ? "Start" : "Restart"}
         </MainButton>
         <DangerButton
           onClick={() => {
