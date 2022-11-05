@@ -11,8 +11,8 @@ const TimerPreview = () => {
   const [showsTimer, setShowsTimer] = useState<boolean>(false);
 
   useEffect(() => {
-    timerService.setInitialMinutes(0);
-    timerService.setInitialSeconds(2);
+    timerService.setInitialMinutes(2);
+    timerService.setInitialSeconds(59);
   }, []);
 
   return (
