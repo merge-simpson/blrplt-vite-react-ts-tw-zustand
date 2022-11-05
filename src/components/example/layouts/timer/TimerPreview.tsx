@@ -29,10 +29,16 @@ const TimerPreview = () => {
         </MainButton>
         <DangerButton
           onClick={() => {
-            timerService.pause();
+            timerService.isRunning
+              ? timerService.pause()
+              : timerService.resume();
           }}
         >
-          Pause
+          {timerService.isRunning
+            ? "Pause"
+            : timerService.isOver
+            ? "Pause"
+            : "Resume"}
         </DangerButton>
       </div>
       {/* initialMinute만 적으면: 2분 입력 시 1분 59초로 시작 */}
