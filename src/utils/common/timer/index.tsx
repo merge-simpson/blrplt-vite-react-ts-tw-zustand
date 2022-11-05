@@ -11,7 +11,7 @@ import Timer, { TimerProps } from "./widgets/Timer";
 
 export const useTimerService = () => {
   const [isRunning, setRunning] = useState<boolean>(false);
-  const [isOver, setOver] = useState<boolean>(false);
+  const [isOver, setOver] = useState<boolean>(true);
   const [initialMinutes, setInitialMinutes] = useState<number>(2);
   const [initialSeconds, setInitialSeconds] = useState<IntegerSeconds>(59);
   const [currentMinutes, setCurrentMinutes] = useState<number>(initialMinutes);
@@ -84,6 +84,7 @@ export const useTimerService = () => {
     setCurrentMinutes(initialMinutes);
     setCurrentSeconds(initialSeconds);
     setRunning(willStart);
+    setOver(false);
     return willStart;
   }, [
     isRunning,
@@ -115,6 +116,7 @@ export const useTimerService = () => {
     }
 
     setRunning(false);
+    setOver(true);
     setCurrentMinutes(initialMinutes);
     setCurrentSeconds(initialSeconds);
 
