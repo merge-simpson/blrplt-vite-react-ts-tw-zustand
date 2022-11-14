@@ -1,5 +1,6 @@
-import { CommonDivProps } from "@utils/common/props";
+import { CommonDivProps } from "@models/common/props";
 import { FunctionComponent as FC, useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
 import create from "zustand";
 
 interface ModalState {
@@ -50,14 +51,20 @@ interface ModalProviderProps {
 }
 
 export const ModalProvider: FC<ModalProviderProps> = ({ children: app }) => {
-  const { isOpen, modal } = useModalStore();
+  const { isOpen, setOpen, modal } = useModalStore();
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    // No option to keep modal even though went to another page(location).
+    setOpen(false);
+  }, [location]);
 
   return (
     <div className="relative z-0 min-h-screen">
+      <div className="z-0">{app}</div>
       {isOpen && (
         <aside className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-50 z-10" />
       )}
-      <div className="z-0">{app}</div>
       {isOpen && (
         <aside className="absolute left-0 right-0 top-0 bottom-0 z-20">
           {modal}
