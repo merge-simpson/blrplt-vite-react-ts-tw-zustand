@@ -1,6 +1,7 @@
 import InputFormPreview from "./input-form/TelInputPreview";
 import ZustandPreview from "./context/ZustandPreview";
 import TimerPreview from "./timer/TimerPreview";
+import MultiToastPreview from "../multi-toast/MultiToastPreview";
 
 const UIPreview = () => {
   return (
@@ -8,6 +9,7 @@ const UIPreview = () => {
       <main className="max-w-[40rem] w-full flex flex-col gap-8">
         <h1 className="text-4xl font-bold">UIPreview</h1>
         <section className="flex flex-col gap-8">
+          <MultiToastPreview />
           <InputFormPreview />
           <ZustandPreview />
           <TimerPreview />
