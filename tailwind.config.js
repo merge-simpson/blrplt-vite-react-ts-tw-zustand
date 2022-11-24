@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const defaultColors = require("tailwindcss/colors");
 const defaultDropShadows = require("tailwindcss/defaultTheme").dropShadow;
+const INT0_100 = { ...Array.from(Array(101)).map((_, i) => i) };
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -60,6 +61,7 @@ module.exports = {
         ...defaultColors,
       },
     },
+    zIndex: INT0_100,
     screens: {
       sm: "640px",
       md: "768px",
