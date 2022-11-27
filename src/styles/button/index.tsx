@@ -1,4 +1,4 @@
-import { FC as FC } from "react";
+import { FunctionComponent as FC } from "react";
 import { CommonButtonProps } from "@models/common/props";
 
 // TODO forwardRef
