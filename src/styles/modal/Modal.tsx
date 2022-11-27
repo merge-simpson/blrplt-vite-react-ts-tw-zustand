@@ -63,6 +63,7 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children: app }) => {
     <div className="relative z-0 min-h-screen">
       <div className="z-0">{app}</div>
       {isOpen && (
+        // 사용성에 따라 position 개선을 고려 중(배경 움직임이 없도록 할 것인지, 있도록 할 것인지. position과 크기로 제어 가능).
         <aside className="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-50 z-10" />
       )}
       {isOpen && (
