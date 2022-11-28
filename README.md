@@ -7,4 +7,3 @@
 - tailwind 3
 - zustand v2
 - react framer(framer motion v7)
-# react-signup-in-step
