@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root *:focus,
+#root *:active {
+  -webkit-tap-highlight-color: transparent;
+}
