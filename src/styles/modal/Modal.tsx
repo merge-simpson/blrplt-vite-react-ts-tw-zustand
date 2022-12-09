@@ -63,14 +63,19 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children: app }) => {
 
   useLayoutEffect(() => {
     if (!isOpen) {
+      // Recover to current overflow state of document.body
       document.body.style.overflow = currntOverflowRef.current;
       return;
     }
 
+    // Save current overflow state of document.body(To recover it later)
     currntOverflowRef.current = document.body.style.overflow;
+
+    // Set overflow hidden on document.body
     document.body.style.overflow = "hidden";
 
     return () => {
+      // Recover to current overflow state of document.body
       document.body.style.overflow = currntOverflowRef.current;
     };
   }, [isOpen]);
