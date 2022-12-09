@@ -1,5 +1,5 @@
 import { CommonDivProps } from "@models/common/props";
-import { FunctionComponent as FC, useLayoutEffect } from "react";
+import { FunctionComponent as FC, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import create from "zustand";
 
@@ -54,19 +54,26 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children: app }) => {
   const { isOpen, setOpen, modal } = useModalStore();
   const location = useLocation();
 
+  const currntOverflowRef = useRef<string>(document.body.style.overflow);
+
   useLayoutEffect(() => {
     // No option to keep modal even though went to another page(location).
     setOpen(false);
   }, [location]);
 
   useLayoutEffect(() => {
-    const currntOverflow = document.body.style.overflow;
+    if (!isOpen) {
+      document.body.style.overflow = currntOverflowRef.current;
+      return;
+    }
+
+    currntOverflowRef.current = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = currntOverflow;
+      document.body.style.overflow = currntOverflowRef.current;
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="relative z-0 min-h-screen">
